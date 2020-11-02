@@ -30,14 +30,15 @@ private    var nohaynumero = true
 
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
+        pantalla.isEnabled = false;
+        barradeanterior.isEnabled = false;
 
     }
+
+
     fun hexadecimalencendido(v: View){
         dec = false
         bin = false
@@ -150,6 +151,7 @@ private    var nohaynumero = true
 
             }
             pantalla.setText(botonpulsado)
+            barradeanterior.setText(botonpulsado)
         }
 
 
@@ -364,7 +366,16 @@ private    var nohaynumero = true
         }
     }
 
-
+    fun borrar (v: View){
+        pantalla.setText("")
+        v1 = 0F
+        v2 = 0F
+        contmult = false
+        cont = false
+        sum = false
+        contdiv =  false
+        contrest = false
+    }
 
 
 
