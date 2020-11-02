@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CalculadoraFINAL</string>
+    <string name="resultado">resultado</string>
 </resources>

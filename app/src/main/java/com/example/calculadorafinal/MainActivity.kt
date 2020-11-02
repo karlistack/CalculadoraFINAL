@@ -5,36 +5,37 @@ package com.example.calculadorafinal
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Integer.parseInt
-import java.lang.Integer.toString
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.tan
 
 class MainActivity : AppCompatActivity() {
-private    var nohaynumero = true
- private   var numeroantiguo = ""
-   private var operacionbase = "+"
-    private var sum: Boolean = false
-    private var contrest: Boolean = false
-    private var contmult: Boolean = false
-    private var contdiv: Boolean = false
-    private var cont: Boolean = false
-    private var v1: Float = 0F
-    private var v1b: Int = 0
-    private var v1c: String = ""
+
+    private var sumacion: Boolean = false
+    private var restacion: Boolean = false
+    private var multiplicasion: Boolean = false
+    private var divisionacion: Boolean = false
+    private var secontara: Boolean = false
+    private var num1: Float = 0F
+    private var num1binario: Int = 0
+    private var num1hexa: String = ""
     private var v2: Float = 0F
-    private var memory: Float = 0F
     private var bin: Boolean = false
     private var dec: Boolean = true
     private var hex: Boolean = false
+    private var memory: Float = 0F
+
+
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        pantalla.isEnabled = false;
-        barradeanterior.isEnabled = false;
+        pantalla.isEnabled = false
+        barradeanterior.isEnabled = false
 
     }
 
@@ -45,7 +46,6 @@ private    var nohaynumero = true
         hex = true
         uno.isEnabled=true
         lacoma.isEnabled = false
-        //signo.isEnabled = false
         dos.isEnabled = true
         tres.isEnabled = true
         cuatro.isEnabled = true
@@ -69,7 +69,6 @@ private    var nohaynumero = true
         cero.isEnabled=true
         uno.isEnabled=true
         lacoma.isEnabled = false
-        //signo.isEnabled = false
         dos.isEnabled = true
         tres.isEnabled = true
         cuatro.isEnabled = true
@@ -96,7 +95,6 @@ private    var nohaynumero = true
         cero.isEnabled=true
         uno.isEnabled=true
         lacoma.isEnabled = false
-        //signo.isEnabled = false
         dos.isEnabled = false
         tres.isEnabled = false
         cuatro.isEnabled = false
@@ -115,308 +113,359 @@ private    var nohaynumero = true
 
 
     }
-
-        fun numberEvent(view: View) {
-            if(nohaynumero)
-                pantalla.setText("")
-            nohaynumero = false
-            var botonpulsado = pantalla.text.toString()
-            val botonseleccionado = view as Button
-
-            when(botonseleccionado.id){
-                uno.id->{botonpulsado+= "1"}
-                dos.id->{botonpulsado+= "2"}
-                tres.id->{botonpulsado+= "3"}
-                cuatro.id->{botonpulsado+= "4"}
-                cinco.id->{botonpulsado+= "5"}
-                seis.id->{botonpulsado+= "6"}
-                siete.id->{botonpulsado+= "7"}
-                ocho.id->{botonpulsado+= "8"}
-                nueve.id->{botonpulsado+= "9"}
-                cero.id->{botonpulsado+="0"}
-                anterior.id->{botonpulsado="$botonpulsado"}
-                borra.id->{botonpulsado+=""}
-                lacoma.id->{
-                    "$botonpulsado,"
-                }
-                letraA.id->{botonpulsado+"A"}
-                letraB.id->{botonpulsado+"B"}
-                letraC.id->{botonpulsado+"C"}
-                letraD.id->{botonpulsado+"D"}
-                letraE.id->{botonpulsado+"E"}
-                letraF.id->{botonpulsado+"F"}
-
-
-                negativopostivo.id->{botonpulsado ="-$botonpulsado"}
-
-            }
-            pantalla.setText(botonpulsado)
-            barradeanterior.setText(botonpulsado)
+    fun uno (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "1")
+        else{
+            pantalla.setText("1")
         }
+    }
+    fun dos (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "2")
+    }
+    fun tres (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "3")
+    }
+    fun cuatro (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "4")
+    }
+    fun cinco (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "5")
+    }
+    fun cero (v: View){
+        if(pantalla.text.toString() != "0" || dec){
+            pantalla.setText(pantalla.text.toString() + "0")
+        }else{
+            pantalla.setText(pantalla.text.toString() + "0")
+        }
+    }
+    fun seis (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "6")
+    }
+    fun ocho (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "8")
+    }
+    fun nueve (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "9")
+    }
+    fun siete (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "7")
+    }
+    fun lacoma (v: View){
+        if (pantalla.text.isNotEmpty()) {
+            if (!pantalla.text.toString().contains("."))
+                pantalla.setText(pantalla.text.toString() + ".")
+        }
+    }
+    fun letraA (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText("""${pantalla.text}A""")
+    }
+    fun letraB (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "B")
+    }fun letraC(v: View) {
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "C")
+    }
 
+    fun LetraD (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "D")
+    }
 
+    fun letraF (v: View){
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "F")
+    }
+    fun borrar (v: View){
+        if(pantalla.text.toString() != "0"){
+            pantalla.setText(pantalla.text.substring(0, pantalla.text.length -1))
+        }
+    }
+    fun signo (v: View){
+        //var pant: Float = pantalla.text.toString().toFloat()
+        pantalla.setText("""${pantalla.text.toString().toFloat() * -1}""")
 
+   /*   Las tengo que implementar
+    }
+    fun mSum (v: View) {
 
-    //para la parte de la calculadora cientifica
-    fun sumar (v: View){
-        if(dec){
-            if (pantalla.text.isNotEmpty()){
-                sum = true
-                cont = true
-                v1 = pantalla.text.toString().toFloat()
-                pantalla.setText("")
-
-            }
-        }else if(bin){
-            if (pantalla.text.isNotEmpty()) {
-                sum = true
-                cont = true
-                v1b = pantalla.text.toString().toInt()
-                pantalla.setText("")
-            }
-        }else if(hex){
-            if (pantalla.text.isNotEmpty()) {
-                sum = true
-                cont = true
-                v1c = pantalla.text.toString()
-                pantalla.setText("")
-            }
+        if (!pantalla.text.isEmpty()) {
+            memory = memory + pantalla.text.toString().toFloat()
+            pantalla.setText("")
         }
 
     }
-
-    fun resta (v: View){
-        if(dec){
-            if (pantalla.text.isNotEmpty()){
-                contrest = true
-                cont = true
-                v1 = pantalla.text.toString().toFloat()
-                pantalla.setText("")
-
-            }
-        }else if(bin){
-            if (pantalla.text.isNotEmpty()) {
-                contrest = true
-                cont = true
-                v1b = pantalla.text.toString().toInt()
-                pantalla.setText("")
-            }
-        }else if(hex){
-            if (pantalla.text.isNotEmpty()) {
-                contrest = true
-                cont = true
-                v1c = pantalla.text.toString()
-                pantalla.setText("")
-            }
+    fun mRest (v: View){
+        if (pantalla.text.isNotEmpty()) {
+            memory -= pantalla.text.toString().toFloat()
+            pantalla.setText("")
         }
     }
-    fun division (v: View){
-        if(dec){
-            if (pantalla.text.isNotEmpty()){
-                contdiv = true
-                cont = true
-                v1 = pantalla.text.toString().toFloat()
-                pantalla.setText("")
+    fun mPant (v: View){
+        pantalla.setText(""+ memory)
+    }
+    fun mBorr (v: View){
+        memory = 0F
+    }
 
-            }
-        }else if(bin) {
-            if (pantalla.text.isNotEmpty()) {
-                contdiv = true
-                cont = true
-                v1b = pantalla.text.toString().toInt()
-                pantalla.setText("")
-            }
-        }else if(hex){
-            if (pantalla.text.isNotEmpty()) {
-                contdiv = true
-                cont = true
-                v1c = pantalla.text.toString()
-                pantalla.setText("")
-            }
+    fun borrarPant (v: View){
+        pantalla.setText("")
+    }
+    fun borrarTotal (v: View){
+        pantalla.setText("")
+        num1 = 0F
+        v2 = 0F
+        multiplicasion = false
+        secontara = false
+        sumacion = false
+        divisionacion=  false
+        restacion = false
+    }*/
+    fun seno (v: View){
+        if(!pantalla.text.toString().isEmpty()){
+            var sin = sin( pantalla.text.toString().toDouble())
+            barradeanterior.setText("" + sin)
         }
     }
-    fun multiplicacion (v: View){
-        if(dec){
-            if (pantalla.text.isNotEmpty()){
-                contmult = true
-                cont = true
-                v1 = pantalla.text.toString().toFloat()
-                pantalla.setText("")
-
-            }
-        }else if(bin) {
-            if (pantalla.text.isNotEmpty()) {
-                contmult = true
-                cont = true
-                v1b = pantalla.text.toString().toInt()
-                pantalla.setText("")
-            }
-        }else if(hex){
-            if (pantalla.text.isNotEmpty()) {
-                contmult = true
-                cont = true
-                v1c = pantalla.text.toString()
-                pantalla.setText("")
-            }
+    fun coseno (v: View){
+        if(!pantalla.text.toString().isEmpty()){
+            var cos = cos( pantalla.text.toString().toDouble())
+            barradeanterior.setText("   cos" + cos)
         }
     }
-    fun igual (v:View){
+    fun tangente (v: View){
+        if(!pantalla.text.toString().isEmpty()){
+            var tan = tan( pantalla.text.toString().toDouble())
+            barradeanterior.setText("" + tan)
+        }
+    }
+
+
+    fun anterior(v: View) {
+
+    }
+    fun letraE(v: View) {
+        if(pantalla.text.toString() != "0")
+            pantalla.setText(pantalla.text.toString() + "E")
+
+    }
+
+    fun igual(view: View) {
         if(dec) {
-            if (sum) {
+            if (sumacion) {
+                val num2: Float = pantalla.text.toString().toFloat()
+                val sol: Float = num1 + num2
+                barradeanterior.setText(sol.toString())
+                sumacion = false
+                secontara = false
+            } else if (restacion) {
+                val num2: Float = pantalla.text.toString().toFloat()
+                val sol: Float = num1 - num2
+                barradeanterior.setText(sol.toString())
+                restacion = false
+                secontara = false
+            } else if (divisionacion) {
                 val v2: Float = pantalla.text.toString().toFloat()
-                val sol: Float = v1 + v2
-                pantalla.setText(sol.toString())
-                sum = false
-                cont = false
-            } else if (contrest) {
+                val sol: Float = num1 / v2
+                barradeanterior.setText(sol.toString())
+                divisionacion = false
+                secontara = false
+            } else if (multiplicasion) {
                 val v2: Float = pantalla.text.toString().toFloat()
-                val sol: Float = v1 - v2
-                pantalla.setText(sol.toString())
-                contrest = false
-                cont = false
-            } else if (contdiv) {
-                val v2: Float = pantalla.text.toString().toFloat()
-                val sol: Float = v1 / v2
-                pantalla.setText(sol.toString())
-                contdiv = false
-                cont = false
-            } else if (contmult) {
-                val v2: Float = pantalla.text.toString().toFloat()
-                val sol: Float = v1 * v2
-                pantalla.setText(sol.toString())
-                contmult = false
-                cont = false
+                val sol: Float = num1 * v2
+                barradeanterior.setText(sol.toString())
+                multiplicasion = false
+                secontara = false
             }
         } else if(bin){
-            if (sum) {
+            if (sumacion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 2)
+                val t1: Int = parseInt(num1binario.toString(), 2)
                 val t2: Int  = parseInt(v2, 2)
                 val solb = (t1 + t2)
-                val resultado: String = toString(solb)
-                pantalla.setText(resultado)
-                sum = false
-                cont = false
-            } else if (contrest) {
+                val resultado: String = solb.toString()
+                barradeanterior.setText(resultado)
+                sumacion = false
+                secontara = false
+            } else if (restacion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 2)
+                val t1: Int = parseInt(num1binario.toString(), 2)
                 val t2: Int  = parseInt(v2, 2)
-                val solb = t1 - t2
-                val resultado: String = toString(solb, 2)
-                pantalla.setText(resultado)
-                contrest = false
-                cont = false
-            } else if (contdiv) {
+                val solucionBinaria = t1 - t2
+                val resultado: String = solucionBinaria.toString(2)
+                barradeanterior.setText(resultado)
+                restacion = false
+                secontara = false
+            } else if (divisionacion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 2)
+                val t1: Int = parseInt(num1binario.toString(), 2)
                 val t2: Int  = parseInt(v2, 2)
                 val solb = t1 / t2
-                val resultado: String = toString(solb, 2)
-                pantalla.setText(resultado)
-                contdiv = false
-                cont = false
-            } else if (contmult) {
+                val resultado: String = solb.toString(2)
+                barradeanterior.setText(resultado)
+                divisionacion = false
+                secontara = false
+            } else if (multiplicasion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 2)
+                val t1: Int = parseInt(num1binario.toString(), 2)
                 val t2: Int  = parseInt(v2, 2)
                 val solb = t1 * t2
-                val resultado: String = toString(solb, 2)
-                pantalla.setText(resultado)
-                contmult = false
-                cont = false
+                val resultado: String = solb.toString(2)
+                barradeanterior.setText(resultado)
+                multiplicasion = false
+                secontara = false
             }
         }else if(hex){
-            if (sum) {
+            if (sumacion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1c, 16)
+                val t1: Int = parseInt(num1hexa, 16)
                 val t2: Int  = parseInt(v2, 16)
                 val solb = t1 + t2
                 val resultado: String = solb.toString(16)
-                pantalla.setText(resultado)
-                sum = false
-                cont = false
-            } else if (contrest) {
+                pantalla.setText(t1+ t2).toString() //esto es lo que he cambiao
+                barradeanterior.setText(resultado)
+                sumacion = false
+                secontara = false
+            } else if (restacion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 16)
+                val t1: Int = parseInt(num1binario.toString(), 16)
                 val t2: Int  = parseInt(v2, 2)
                 val solb = t1 - t2
                 val resultado: String = solb.toString(16)
-                pantalla.setText(resultado)
-                contrest = false
-                cont = false
-            } else if (contdiv) {
+                barradeanterior.setText(resultado)
+                restacion = false
+                secontara = false
+            } else if (divisionacion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 16)
+                val t1: Int = parseInt(num1binario.toString(), 16)
                 val t2: Int  = parseInt(v2, 2)
                 val solb = t1 / t2
                 val resultado: String = solb.toString(16)
-                pantalla.setText(resultado)
-                contdiv = false
-                cont = false
-            } else if (contmult) {
+                barradeanterior.setText(resultado)
+                divisionacion = false
+                secontara = false
+            } else if (multiplicasion) {
                 val v2: String = pantalla.text.toString()
-                val t1: Int = parseInt(v1b.toString(), 16)
+                val t1: Int = parseInt(num1binario.toString(), 16)
                 val t2: Int  = parseInt(v2, 16)
                 val solb = t1 * t2
                 val resultado: String = solb.toString(2)
-                pantalla.setText(resultado)
-                contmult = false
-                cont = false
+                barradeanterior.setText(resultado)
+                multiplicasion = false
+                secontara = false
             }
         }
     }
+    fun multiplicacion(view: View) {
+        if(dec){
+            if (pantalla.text.isNotEmpty()){
+                multiplicasion = true
+                secontara = true
+                num1 = pantalla.text.toString().toFloat()
+                pantalla.setText("")
 
-    fun borrar (v: View){
-        pantalla.setText("")
-        v1 = 0F
-        v2 = 0F
-        contmult = false
-        cont = false
-        sum = false
-        contdiv =  false
-        contrest = false
-    }
-
-
-
-
-
-    //para el layout simple
-
-    fun evOperador(view: View) {
-        nohaynumero = true
-        numeroantiguo = pantalla.text.toString()
-        val botonseleccionado = view as Button
-        when(botonseleccionado.id){
-           multplicacion.id->{operacionbase="*"}
-            sumar.id->{operacionbase="+"}
-            restar.id->{operacionbase="-"}
-            divison.id->{operacionbase="/"}
+            }
+        }else if(bin) {
+            if (pantalla.text.isNotEmpty()) {
+                multiplicasion = true
+                secontara = true
+                num1binario = pantalla.text.toString().toInt()
+                pantalla.setText("")
+            }
+        }else if(hex){
+            if (pantalla.text.isNotEmpty()) {
+                multiplicasion = true
+                secontara = true
+                num1hexa = pantalla.text.toString()
+                pantalla.setText("")
+            }
         }
-
-
     }
+    fun sumar(view: View) {
+        if(dec){
+            if (pantalla.text.isNotEmpty()){
+                sumacion = true
+                secontara = true
+                num1 = pantalla.text.toString().toFloat()
+                pantalla.setText("")
 
-    fun evIgualalo(view: View) {
-        val numeronuevo = pantalla.text.toString()
-        var resultado = 0.0
-        when(operacionbase){
-            "+"-> {resultado = numeroantiguo.toDouble()+ numeronuevo.toDouble()}
-            "-"-> {resultado = numeroantiguo.toDouble()- numeronuevo.toDouble()}
-            "*"-> {resultado = numeroantiguo.toDouble()* numeronuevo.toDouble()}
-            "/"-> {resultado = numeroantiguo.toDouble()/ numeronuevo.toDouble()}
+            }
+        }else if(bin){
+            if (pantalla.text.isNotEmpty()) {
+                sumacion = true
+                secontara = true
+                num1binario = pantalla.text.toString().toInt()
+                pantalla.setText("")
+            }
+        }else if(hex){
+            if (pantalla.text.isNotEmpty()) {
+                sumacion = true
+                secontara = true
+                num1hexa = pantalla.text.toString()
+                pantalla.setText("")
+            }
         }
-
-        barradeanterior.setText(resultado.toString())
-
     }
+    fun division(view: View) {
+        if(dec){
+            if (pantalla.text.isNotEmpty()){
+                divisionacion = true
+                secontara = true
+                num1 = pantalla.text.toString().toFloat()
+                pantalla.setText("")
 
-    fun evBorra(view: View) {
-        pantalla.setText("0")
-        nohaynumero = true
-        barradeanterior.setText("0")
+            }
+        }else if(bin) {
+            if (pantalla.text.isNotEmpty()) {
+                divisionacion = true
+                secontara = true
+                num1binario = pantalla.text.toString().toInt()
+                pantalla.setText("")
+            }
+        }else if(hex){
+            if (pantalla.text.isNotEmpty()) {
+                divisionacion = true
+                secontara = true
+                num1hexa = pantalla.text.toString()
+                pantalla.setText("")
+            }
+        }
     }
+    fun resta(view: View) {
+        if(dec){
+            if (pantalla.text.isNotEmpty()){
+                restacion = true
+                secontara = true
+                num1 = pantalla.text.toString().toFloat()
+                pantalla.setText("")
 
+            }
+        }else if(bin){
+            if (pantalla.text.isNotEmpty()) {
+                restacion = true
+                secontara = true
+                num1binario = pantalla.text.toString().toInt()
+                pantalla.setText("")
+            }
+        }else if(hex){
+            if (pantalla.text.isNotEmpty()) {
+                restacion = true
+                secontara = true
+                num1hexa = pantalla.text.toString()
+                pantalla.setText("")
+            }
+        }
+    }
 
 
 }

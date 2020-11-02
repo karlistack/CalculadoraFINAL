@@ -20,10 +20,11 @@
         android:ems="10"
         android:gravity="end"
         android:inputType="none"
-        android:text="0"
+        android:text=""
+        android:hint="0"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:textSize="50pt"
+        android:textSize="30pt"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/barradeanterior"
@@ -35,15 +36,15 @@
         android:id="@+id/barradeanterior"
         android:layout_width="0dp"
         android:layout_height="0dp"
-
+        android:hint="resultado"
         android:autofillHints=""
         android:background="@color/white"
         android:ems="10"
         android:gravity="end"
         android:inputType="none"
-        android:text="resultado"
+        android:text=""
         android:textAlignment="textEnd"
-        android:textSize="35pt"
+        android:textSize="15pt"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toStartOf="@+id/pantalla"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +69,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1pt"
             android:layout_marginBottom="2pt">
+
+
+            <Button
+                android:id="@+id/Coseno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="coseno"
+                android:text="Cos"
+                android:layout_marginEnd="2pt"
+                android:layout_marginRight="2pt"
+                android:background="@color/cientificos"/>
+
+
 
 
             <Button
@@ -129,7 +143,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="signo"
                 android:text="+/-"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -141,7 +155,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="anterior"
                 android:text="anterior"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -153,7 +167,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_calculo"
-                android:onClick="numberEvent"
+                android:onClick="lacoma"
                 android:text=","
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -175,6 +189,16 @@
             android:layout_height="match_parent"
             android:layout_marginTop="1pt"
             android:layout_marginBottom="2pt">
+            <Button
+                android:id="@+id/seno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="seno"
+                android:background="@color/cientificos"
+                android:layout_marginEnd="2pt"
+                android:layout_marginRight="2pt"
+                android:text="Sin" />
+
 
 
             <Button
@@ -186,6 +210,7 @@
                 android:layout_weight="1"
                 android:background="@color/cientificos"
                 android:text="A"
+                android:onClick="letraA"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -197,6 +222,7 @@
                 android:layout_weight="1"
                 android:background="@color/cientificos"
                 android:text="D"
+                android:onClick="LetraD"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -208,6 +234,7 @@
                 android:layout_weight="1"
                 android:background="@color/cientificos"
                 android:text="B"
+                android:onClick="letraB"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -218,7 +245,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="seis"
                 android:text="6"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -230,7 +257,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="siete"
                 android:text="7"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -242,7 +269,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="ocho"
                 android:text="8"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -254,8 +281,20 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="nueve"
                 android:text="9"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/cinco"
+                android:layout_width="15pt"
+                android:layout_height="30pt"
+                android:layout_marginEnd="2pt"
+                android:layout_marginRight="2pt"
+                android:layout_weight="1"
+                android:background="@color/botones_numero"
+                android:onClick="cinco"
+                android:text="5"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -266,7 +305,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_calculo"
-                android:onClick="evOperador"
+                android:onClick="division"
                 android:text="/"
                 tools:ignore="ButtonStyle,HardcodedText">
 
@@ -280,7 +319,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_calculo"
-                android:onClick="evOperador"
+                android:onClick="multiplicacion"
                 android:text="x"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -293,6 +332,17 @@
             android:layout_marginBottom="2pt">
 
             <Button
+
+                android:id="@+id/Tangente"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="tangente"
+                android:text="Tan"
+                android:background="@color/cientificos"
+                android:layout_marginEnd="2pt"
+                android:layout_marginRight="2pt" />
+
+            <Button
                 android:id="@+id/letraE"
                 android:layout_width="15pt"
                 android:layout_height="30pt"
@@ -301,6 +351,7 @@
                 android:layout_weight="1"
                 android:background="@color/cientificos"
                 android:text="E"
+                android:onClick="letraE"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -312,6 +363,7 @@
                 android:layout_weight="1"
                 android:background="@color/cientificos"
                 android:text="F"
+                android:onClick="letraF"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -323,6 +375,7 @@
                 android:layout_weight="1"
                 android:background="@color/cientificos"
                 android:text="C"
+                android:onClick="letraC"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
 
@@ -334,7 +387,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="cero"
                 android:text="0"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -346,7 +399,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="uno"
                 android:text="1"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -358,7 +411,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="dos"
                 android:text="2"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
@@ -370,7 +423,7 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="tres"
                 android:text="3"
                 tools:ignore="ButtonStyle,HardcodedText"
 
@@ -384,20 +437,8 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_numero"
-                android:onClick="numberEvent"
+                android:onClick="cuatro"
                 android:text="4"
-                tools:ignore="ButtonStyle,HardcodedText" />
-
-            <Button
-                android:id="@+id/cinco"
-                android:layout_width="15pt"
-                android:layout_height="30pt"
-                android:layout_marginEnd="2pt"
-                android:layout_marginRight="2pt"
-                android:layout_weight="1"
-                android:background="@color/botones_numero"
-                android:onClick="numberEvent"
-                android:text="5"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
@@ -420,9 +461,13 @@
                 android:layout_marginRight="2pt"
                 android:layout_weight="1"
                 android:background="@color/botones_calculo"
-                android:onClick="evOperador"
+                android:onClick="sumar"
                 android:text="+"
                 tools:ignore="ButtonStyle,HardcodedText" />
+
+
+
+
         </TableRow>
 
 
